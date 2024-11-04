@@ -11,5 +11,10 @@ To access the autograder:
 * Module 4: https://classroom.github.com/a/04QA6HZK
 * Quizzes: https://classroom.github.com/a/bGcGc12k
 
-Task0_5:
+# Task0_5:
 "Simple": ![alt text](image.png)
+"Diag": ![alt text](image-1.png)
+"Split": ![alt text](image-2.png)
+"Xor": ![alt text](image-3.png)
+"Circle": ![alt text](image-4.png)
+"Spiral": ![alt text](image-5.png)
