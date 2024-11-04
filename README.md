@@ -18,3 +18,17 @@ To access the autograder:
 "Xor": ![alt text](image-3.png)
 "Circle": ![alt text](image-4.png)
 "Spiral": ![alt text](image-5.png)
+# Task1_5:
+"Simple": ![alt text](image-6.png)
+"Diag": ![alt text](image-7.png)
+"Split": ![alt text](image-8.png)
+"Xor": ![alt text](image-9.png)
+"Circle": ![alt text](image-10.png)
+"Spiral": ![alt text](image-11.png)
+# Task2_5:
+"Simple": ![alt text](image-12.png)
+"Diag": ![alt text](image-13.png)
+"Split": ![alt text](image-14.png)
+"Xor": ![alt text](image-15.png)
+"Circle": ![alt text](image-16.png)
+"Spiral": ![alt text](image-17.png)
