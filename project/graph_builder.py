@@ -1,5 +1,5 @@
-import sys
-sys.path.append("../minitorch")
+# import sys
+# sys.path.append("../minitorch")
 
 import networkx as nx
 import minitorch
