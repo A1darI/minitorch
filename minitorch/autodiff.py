@@ -66,19 +66,18 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     Returns:
         Non-constant Variables in topological order starting from the right.
     """
-    visited: Set[int] = set()
-    sorted_variables: List[Variable] = []
+    visited = set()
+    order = []
 
-    def dfs(var: Variable):
-        if var.unique_id not in visited:
-            visited.add(var.unique_id)
-            for parent in var.parents:
-                dfs(parent)
-            if not var.is_constant():
-                sorted_variables.append(var)
+    def visit(node: Variable) -> None:
+        visited.add(node.unique_id)
+        for parent in node.parents:
+            if not parent.is_constant() and parent.unique_id not in visited:
+                visit(parent)
+        order.append(node)
 
-    dfs(variable)
-    return reversed(sorted_variables)
+    visit(variable)
+    return reversed(order)
 
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -92,17 +91,22 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
 
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
-    sorted_variables = list(topological_sort(variable))
-    derivatives = {var.unique_id: 0 for var in sorted_variables}
-    derivatives[variable.unique_id] = deriv
+    gradients = {id(variable): deriv}
 
-    for var in sorted_variables:
-        current_deriv = derivatives[var.unique_id]
+    for var in topological_sort(variable):
+        var_id = id(var)
+        if var_id not in gradients:
+            gradients[id(var)] = 0
+        d_output = gradients[var_id]
         if var.is_leaf():
-            var.accumulate_derivative(current_deriv)
+            var.accumulate_derivative(d_output)
         else:
-            for parent_var, local_deriv in var.chain_rule(current_deriv):
-                derivatives[parent_var.unique_id] += local_deriv
+            for input_var, d_input in var.chain_rule(d_output):
+                input_id = id(input_var)
+                if input_id in gradients:
+                    gradients[input_id] += d_input
+                else:
+                    gradients[input_id] = d_input
 
 
 @dataclass
